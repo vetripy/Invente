@@ -323,7 +323,7 @@ body{
     gap: 0.5rem;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 650px) {
   .sidebar.close .nav-links li .sub-menu{
     display: none;
   }
@@ -342,5 +342,13 @@ body{
     width: 100%;
     left: 0;
   }
-
+  .logo{
+    display: none;
+  }
+  .profile_name{
+    display: none;
+  }
+  .profile-details{
+    z-index: 999;
+  }
 }

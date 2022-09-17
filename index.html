@@ -35,16 +35,12 @@
                 <span class="link_name">Add Event Details</span>
                 </a>
             </li>
-
             <li>
-                <div class="profile-details">
-                    <div class="name-job">
-                        <div class="profile_name">USER NAME</div>
-                    </div>
-                    <i class='bx bx-log-out' ></i>
-                </div>
-            </li>
-     
+                <a href="#">
+                <i class='bx bxs-log-out'></i>
+                <span class="link_name">Logout</span>
+                </a>
+            </li>     
         </ul>
     </div>
     
@@ -104,7 +100,7 @@
                 <div class="form-group">
                     <input type="number" class="form-control" id="rounds" name="rounds" placeholder="Enter number of rounds here/ 0 if no ronuds" required="required">
                     <br><br>
-                    <button type="button" class="btn btn-primary btn-block" onclick="addrounds">Add Rounds</button>
+                    <input type="button" class="btn btn-primary btn-block" onclick="addrounds()" value="Add Rounds" />
                 </div>
 
 
@@ -139,36 +135,34 @@
 
 
     <script defer>
-            let arrow = document.querySelectorAll(".arrow");
-            for (var i = 0; i < arrow.length; i++) {
-                arrow[i].addEventListener("click", (e)=>{
-            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-            arrowParent.classList.toggle("showMenu");
-                });
-            }
-            let sidebar = document.querySelector(".sidebar");
-            let sidebarBtn = document.querySelector(".bx-menu");2
-            sidebarBtn.addEventListener("click", ()=>{
-                sidebar.classList.toggle("close");
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e)=>{
+        let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+        arrowParent.classList.toggle("showMenu");
             });
+        }
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");2
+        sidebarBtn.addEventListener("click", ()=>{
+            sidebar.classList.toggle("close");
+        });
 
-            function addrounds(){
+        function addrounds(){
 
-                var rounds = document.getElementById("rounds").value;
+            var rounds = document.getElementById("rounds").value;
+            console.log('hello')
+            var roundcontainer = document.getElementById("round-container");
 
-                var roundcontainer = document.getElementById("round-container");
+            roundcontainer.innerHTML = "";
 
-                roundcontainer.innerHTML = "";
-
-                for(var i=0; i<rounds; i++){
-                    var round = document.createElement("div");
-                    round.className = "form-group";
-                    round.innerHTML = `<input type="text" id="event${i+1}-title" class="from-control" name="round1" placeholder="Enter Round Title"> <br><br> <textarea id="event${i+1}-desc" class="large-desc" name="round1-description" placeholder="Enter your description here"></textarea>`;
-                    roundcontainer.appendChild(round);
-                }
-            }   
-
-
+            for(var i=0; i<rounds; i++){
+                var round = document.createElement("div");
+                round.className = "form-group";
+                round.innerHTML = `<input type="text" id="event${i+1}-title" class="from-control" name="round1" placeholder="Enter Round Title"> <br><br> <textarea id="event${i+1}-desc" class="large-desc" name="round1-description" placeholder="Enter your description here"></textarea>`;
+                roundcontainer.appendChild(round);
+            }
+        }   
     </script>
 
 
