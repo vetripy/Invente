@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="./static/style.css">
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="./static/static.js"></script>
+    </head>
+<body>
+    <div class="sidebar open">
+
+        <div class="logo-details">
+            <span class="logo_name"><img class="logo" src='./static/logo.png' /></span>
+        </div>
+    
+        <ul class="nav-links">
+            <li id="home">
+                <a href="#">
+                <i class='bx bxs-home' ></i>
+                <span class="link_name">Home</span>
+                </a>
+            </li>
+
+            <li id="login">
+                <a href="#">
+                <i class='bx bxs-lock-open'></i>
+                <span class="link_name">Login</span>
+                </a>
+            </li>
+
+            <li id="addevent">
+                <a href="#">
+                <i class='bx bx-add-to-queue'></i>
+                <span class="link_name">Add Event Details</span>
+                </a>
+            </li>
+
+            <li>
+                <div class="profile-details">
+                    <div class="name-job">
+                        <div class="profile_name">USER NAME</div>
+                    </div>
+                    <i class='bx bx-log-out' ></i>
+                </div>
+            </li>
+     
+        </ul>
+    </div>
+    
+    <section class="home-section">
+        <div class="home-content">
+            <i class='bx bx-menu' ></i>
+            <h2 class="page-title"></h2>
+        </div>
+
+        <div id="login-form" class="login-form" style="display: none;">
+
+            <form>
+                <h2 class="text-center" style="margin-bottom: 3rem;">Login</h2>       
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Enter your Email ID here" required="required">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Enter your Password here   " required="required">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div id="event-form" class="event-form">
+            <form>
+                <h2 class="text-center" style="margin-bottom: 3rem;">Event Details</h2>       
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="title" placeholder="Enter Event Title here" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <textarea class="large-desc" name="description" placeholder="Enter your description here" required="required"></textarea>
+                </div>
+
+
+                <div class="container">
+                    <div class="form-group">
+                        <textarea class="small-desc" name="shedule" placeholder="Enter your shedule here"></textarea>
+                    </div>
+    
+                    <div class="form-group">
+                        <textarea class="small-desc" name="note" placeholder="Enter your note here"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea class="small-desc" name="rules" placeholder="Enter your rules here"></textarea>
+                    </div>
+                </div>
+                
+
+
+                <div class="form-group">
+                    <input type="number" class="form-control" id="rounds" name="rounds" placeholder="Enter number of rounds here/ 0 if no ronuds" required="required">
+                    <br><br>
+                    <button type="button" class="btn btn-primary btn-block" onclick="addrounds">Add Rounds</button>
+                </div>
+
+
+                <div id="round-container">
+
+                </div>
+                
+                <div class="form-group">
+                    <input type="number" class="form-control" name="per-team" placeholder="Enter number of participants per team here/ 1 for individual Event" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <input type="date" class="form-control" name="date" placeholder="Enter date here" required="required">
+                </div>
+
+                <div class="form-group">
+                    <textarea class="large-desc" name="participation-criteria" placeholder="Enter participation criteria here if any." required="required"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="prize-amount" placeholder="Enter prize amount description" required="required">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+
+            </form>
+
+
+        </div>
+
+
+    <script defer>
+            let arrow = document.querySelectorAll(".arrow");
+            for (var i = 0; i < arrow.length; i++) {
+                arrow[i].addEventListener("click", (e)=>{
+            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+                });
+            }
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".bx-menu");2
+            sidebarBtn.addEventListener("click", ()=>{
+                sidebar.classList.toggle("close");
+            });
+
+            function addrounds(){
+
+                var rounds = document.getElementById("rounds").value;
+
+                var roundcontainer = document.getElementById("round-container");
+
+                roundcontainer.innerHTML = "";
+
+                for(var i=0; i<rounds; i++){
+                    var round = document.createElement("div");
+                    round.className = "form-group";
+                    round.innerHTML = `<input type="text" id="event${i+1}-title" class="from-control" name="round1" placeholder="Enter Round Title"> <br><br> <textarea id="event${i+1}-desc" class="large-desc" name="round1-description" placeholder="Enter your description here"></textarea>`;
+                    roundcontainer.appendChild(round);
+                }
+            }   
+
+
+    </script>
+
+
+    </section>
+</body>
+</html>
+
