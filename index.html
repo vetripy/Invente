@@ -69,29 +69,29 @@
         </div>
 
         <div id="event-form" class="event-form" style="display: none;">
-            <form>
+            <form id="event_form">
                 <h2 class="text-center" style="margin-bottom: 3rem;">Event Details</h2>       
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="title" placeholder="Enter Event Title here" required="required">
+                    <input id="event_title" type="text" class="form-control" name="title" placeholder="Enter Event Title here" required="required">
                 </div>
                 
                 <div class="form-group">
-                    <textarea class="large-desc" name="description" placeholder="Enter your description here" required="required"></textarea>
+                    <textarea  id="event_description" class="large-desc" name="description" placeholder="Enter your description here" required="required"></textarea>
                 </div>
 
 
                 <div class="container">
                     <div class="form-group">
-                        <textarea class="small-desc" name="shedule" placeholder="Enter your shedule here"></textarea>
+                        <textarea id="event_schedule" class="small-desc" name="schedule" placeholder="Enter your schedule here"></textarea>
                     </div>
     
                     <div class="form-group">
-                        <textarea class="small-desc" name="note" placeholder="Enter your note here"></textarea>
+                        <textarea id="event_note" class="small-desc" name="note" placeholder="Enter your note here"></textarea>
                     </div>
                     
                     <div class="form-group">
-                        <textarea class="small-desc" name="rules" placeholder="Enter your rules here"></textarea>
+                        <textarea id="event_rules" class="small-desc" name="rules" placeholder="Enter your rules here"></textarea>
                     </div>
                 </div>
                 
@@ -109,23 +109,23 @@
                 </div>
                 
                 <div class="form-group">
-                    <input type="number" class="form-control" name="per-team" placeholder="Enter number of participants per team here/ 1 for individual Event" required="required">
+                    <input type="number" id="event_participants" class="form-control" name="per-team" placeholder="Enter number of participants per team here/ 1 for individual Event" required="required">
                 </div>
                 
                 <div class="form-group">
-                    <input type="date" class="form-control" name="date" placeholder="Enter date here" required="required">
+                    <input type="date" id="event_date" class="form-control" name="date" placeholder="Enter date here" required="required">
                 </div>
 
                 <div class="form-group">
-                    <textarea class="large-desc" name="participation-criteria" placeholder="Enter participation criteria here if any." required="required"></textarea>
+                    <textarea class="large-desc" id="event_part_desc" name="participation-criteria" placeholder="Enter participation criteria here if any." required="required"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="prize-amount" placeholder="Enter prize amount description" required="required">
+                    <input type="text" class="form-control" id="event_prize" name="prize-amount" placeholder="Enter prize amount description" required="required">
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    <button id="event_submit" type="submit" class="btn btn-primary btn-block">Submit</button>
                 </div>
 
             </form>
@@ -151,7 +151,6 @@
         function addrounds(){
 
             var rounds = document.getElementById("rounds").value;
-            console.log('hello')
             var roundcontainer = document.getElementById("round-container");
 
             roundcontainer.innerHTML = "";
@@ -159,7 +158,7 @@
             for(var i=0; i<rounds; i++){
                 var round = document.createElement("div");
                 round.className = "form-group";
-                round.innerHTML = `<input type="text" id="event${i+1}-title" class="from-control" name="round1" placeholder="Enter Round Title"> <br><br> <textarea id="event${i+1}-desc" class="large-desc" name="round1-description" placeholder="Enter your description here"></textarea>`;
+                round.innerHTML = `<input type="text" id="event_round_${i+1}_title" class="from-control" name="round1" placeholder="Enter Round Title"> <br><br> <textarea id="event_round_${i+1}_desc" class="large-desc" name="round1-description" placeholder="Enter your description here"></textarea>`;
                 roundcontainer.appendChild(round);
             }
         }   
