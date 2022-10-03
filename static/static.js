@@ -27,37 +27,65 @@ document.addEventListener("DOMContentLoaded", function() {
         
         var event_title = document.getElementById('event_title').value;
         var event_description = document.getElementById('event_description').value;
-        var event_schedule = document.getElementById('event_schedule').value;
-        var event_note = document.getElementById('event_note').value;
-        var event_rules = document.getElementById('event_rules').value;
+        var event_type = document.getElementById('event_type').value;
         var rounds = document.getElementById('rounds').value;
+        var teamSize = document.getElementById('event_participants').value;
+        var event_date = document.getElementById('event_date').value;
+        var dept = document.getElementById('dept').value;
+        var venue = document.getElementById('venue').value;
 
+        var type_desc = document.getElementById('type_desc').value;
+        let meta = {};
 
-        let rounds_data = {};
-        for (var i = 0; i < rounds; i++) {
-            let round = {
-                "round_title": document.getElementById(`event_round_${i+1}_title`).value,
-                "round_desc": document.getElementById(`event_round_${i+1}_desc`).value
+        if (type_desc === "desc"){
+            for (var i = 0; i < rounds; i++) {
+                let round = {
+                    "round_title": document.getElementById(`event_round_${i+1}_title`).value,
+                    "round_desc": document.getElementById(`event_round_${i+1}_desc`).value
+                }
+                meta = {...meta, [round.round_title]: round.round_desc};
+            
             }
-            let n = i + 1;
-            rounds_data = {...rounds_data, [`round_${n}`]: round};
+        }
+        else if (type_desc === "bullets"){
+            for(var i = 0; i < rounds; i++){
+
+                let no_bullets = document.getElementById(`no_bullets_${i+1}`).value;
+
+                let bullets = [];
+
+                for(var j = 0; j < no_bullets; j++){
+                    bullets.push(document.getElementById(`event_round_${i+1}_bullet_${j+1}`).value);
+                }
+                let round = {
+                    "round_title": document.getElementById(`event_round_${i+1}_title`).value,
+                    "round_desc": bullets
+                }
+                meta = {...meta, [round.round_title]: round.round_desc};
+            }
+
+            
         }
         
-        var event_part_desc = document.getElementById('event_part_desc').value;
 
-        var event_prize = document.getElementById('event_prize').value;
+        var winner = document.getElementById('winner').value;
+        var runner = document.getElementById('runner').value;
 
         var event_data = {
-            "event_title": event_title,
-            "event_description": event_description,
-            "event_schedule": event_schedule,
-            "event_note": event_note,
-            "event_rules": event_rules,
-            "rounds": rounds_data,
-            "event_part_desc": event_part_desc,
-            "event_prize": event_prize
+            "id": 0,
+            "title": event_title,
+            "desc": event_description,
+            "type": event_type,
+            "teamSize": teamSize,
+            "dept": dept,
+            "venue": venue,
+            "time": event_date,
+            "winner": winner,
+            "runner": runner,
+            "meta": meta,
         };
         
         console.log(event_data);
+        
       })
 });

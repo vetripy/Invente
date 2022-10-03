@@ -232,6 +232,7 @@ body{
   display: flex;
   align-items: center;
 }
+
 .home-section .home-content .bx-menu,
 .home-section .home-content .text{
   color: #11101d;
@@ -287,12 +288,24 @@ body{
   box-shadow: 0.5px 0.5px 8px 0.5px #dcdcdc;
   margin: 2rem;
 }
-
+.form-select{
+  min-height: 4rem;
+  padding-inline: 1rem;
+  width: 100%;
+  background: #fff;
+  font-size: large;
+  
+}
+.container-elements{
+  width: 50%;
+}
 .form-group{
   padding-block: 1rem;
 }
-.form-group button{
+.btn{
   width: 100%;
+}
+.btn, .add_buttons{
   min-height: 4rem;
   background-color: #1d1b31;
   color: white;
@@ -303,6 +316,9 @@ body{
   cursor: pointer;
   transition: all 0.3s ease;
 }
+.add_buttons{
+  width: 25%;
+}
 .profile_name{
   margin-left: 1rem;
 }
@@ -312,7 +328,20 @@ body{
   flex: 1;
   gap: 1rem;
 }
-
+.flex{
+  display: flex;
+  gap:1rem;
+}
+.line{
+  border-width: 2.5px;
+  background-color: black;
+}
+#add_buttons{
+  width:25%;
+}
+.flex .column{
+  flex-direction: column;
+}
 
 @media (max-width: 1100px) {
   .container{

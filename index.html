@@ -80,25 +80,37 @@
                     <textarea  id="event_description" class="large-desc" name="description" placeholder="Enter your description here" required="required"></textarea>
                 </div>
 
-
                 <div class="container">
-                    <div class="form-group">
-                        <textarea id="event_schedule" class="small-desc" name="schedule" placeholder="Enter your schedule here"></textarea>
+                    <div class="container-elements">
+                        <select name="event_type" class="form-select" id="event_type">
+                            <option value="team">Team</option>
+                            <option value="solo">Solo</option>
+                            <option value="teamORsolo">Team or Solo</option>
+                        </select>
                     </div>
-    
-                    <div class="form-group">
-                        <textarea id="event_note" class="small-desc" name="note" placeholder="Enter your note here"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <textarea id="event_rules" class="small-desc" name="rules" placeholder="Enter your rules here"></textarea>
+                    <div class="container-elements">
+                        <select name="event_type" class="form-select" id="dept">
+                            <option value="CSE">Computer Science</option>
+                            <option value="IT">Information Technology</option>
+                            <option value="ECE">Electronics and Communication Engineering</option>
+                            <option value="EEE">Electrical and Electronics Engineering</option>
+                            <option value="MECH">Mechanical Engineering</option>
+                            <option value="CIVIL">Civil Engineering</option>
+                            <option value="CHEM">Chemical Engineering</option>
+                            <option value="BME">Biomedical Engineering</option>
+                        </select>
                     </div>
                 </div>
-                
+                               
 
 
                 <div class="form-group">
                     <input type="number" class="form-control" id="rounds" name="rounds" placeholder="Enter number of rounds here/ 0 if no ronuds" required="required">
+                    <br><br>
+                    <select class="form-select" name="type_of_desc" id="type_desc">
+                        <option value="desc">Description</option>
+                        <option value="bullets">Bullets</option>
+                    </select>
                     <br><br>
                     <button type="button" class="btn btn-primary btn-block" onclick="addrounds()">Add Rounds</button>
                 </div>
@@ -107,7 +119,11 @@
                 <div id="round-container">
 
                 </div>
-                
+                                
+                <div class="form-group">
+                    <input type="text" id="venue" class="form-control" name="venue" placeholder="Enter the Venue" required="required">
+                </div>
+
                 <div class="form-group">
                     <input type="number" id="event_participants" class="form-control" name="per-team" placeholder="Enter number of participants per team here/ 1 for individual Event" required="required">
                 </div>
@@ -117,11 +133,10 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea class="large-desc" id="event_part_desc" name="participation-criteria" placeholder="Enter participation criteria here if any." required="required"></textarea>
-                </div>
-
+                    <input type="number" class="form-control" id="winner" name="winner" placeholder="Enter prize amount of winner" required="required">
+                </div>                
                 <div class="form-group">
-                    <input type="text" class="form-control" id="event_prize" name="prize-amount" placeholder="Enter prize amount description" required="required">
+                    <input type="number" class="form-control" id="runner" name="runner" placeholder="Enter prize amount of runner" required="required">
                 </div>
 
                 <div class="form-group">
@@ -152,16 +167,35 @@
 
             var rounds = document.getElementById("rounds").value;
             var roundcontainer = document.getElementById("round-container");
+            var type = document.getElementById('type_desc').value;
 
             roundcontainer.innerHTML = "";
 
             for(var i=0; i<rounds; i++){
                 var round = document.createElement("div");
+                round.id =  `round_${i+1}`;
                 round.className = "form-group";
-                round.innerHTML = `<input type="text" id="event_round_${i+1}_title" class="from-control" name="round1" placeholder="Enter Round Title"> <br><br> <textarea id="event_round_${i+1}_desc" class="large-desc" name="round1-description" placeholder="Enter your description here"></textarea>`;
+
+                if (type === "desc"){
+                    round.innerHTML = `<input type="text" id="event_round_${i+1}_title" class="from-control" name="round${i+1}" placeholder="Enter Round Title"> <br><br> <textarea id="event_round_${i+1}_desc" class="large-desc" name="round1-description" placeholder="Enter your description here"></textarea><br><br><hr class="line">`;
+                }
+                else{
+                    round.innerHTML = `<input type="text" id="event_round_${i+1}_title" class="from-control" name="round1" placeholder="Enter Round Title"> <br><br> <div class="flex column"><input type='number' class="form-control" id="no_bullets_${i+1}" name="no_of_bullets" placeholder="Enter the number of bullet points"><br><br><button type="button" id="add_button_${i+1}" class="add_buttons" onClick="addBullets(${i+1})">Add Bullets</button></div><div id='bullet_container_${i+1}'></div><br><br><hr class="line">`;   
+                }
                 roundcontainer.appendChild(round);
             }
         }   
+        function addBullets(i){
+            var no_bullets = document.getElementById(`no_bullets_${i}`).value;
+            var round = document.getElementById(`bullet_container_${i}`);
+            round.innerHTML = "";
+            for(var j=0; j<no_bullets; j++){
+                var bullet = document.createElement("div");
+                bullet.className = "form-group";
+                bullet.innerHTML = `<input type="text" id="event_round_${i}_bullet_${j+1}" class="from-control" name="round${i+1}-bullet${j+1}" placeholder="Enter Bullet Point">`;
+                round.appendChild(bullet);
+            }
+        }
     </script>
 
 
