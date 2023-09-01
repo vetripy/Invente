@@ -1,0 +1,57 @@
+{% extends 'form/base.html' %}
+
+{% block content %}
+    <style>
+        /* style the select tag and submit button simialr to other stlyes*/
+        #select, button{
+            height: 50px;
+            width: 10%;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 1rem;
+            padding-inline: 25px;
+        }   
+        .card-link{
+            text-decoration: none;
+            color: black;
+            display: block;
+            width: 75%;
+        }
+
+        .event-form:hover{
+            background-color: whitesmoke;
+        }
+
+    </style>
+    <form action="{% url 'events' %}" method="POST">
+        {% csrf_token %}
+        <select name="dept" id="select">
+            <option value="all">All</option>
+            <option value="cse">CSE</option>
+            <option value="ece">ECE</option>
+            <option value="eee">EEE</option>
+            <option value="bme">BME</option>
+            <option value="mech">MECH</option>
+            <option value="civil">CIVIL</option>
+            <option value="chem">CHEM</option>
+            <option value="it">IT</option>          
+        </select>
+        <button type="submit">GET</button>
+    </form>
+
+    {% for event in events %}
+
+        <a href="{% url 'event' event.id %}" class="card-link">
+            <div class="event-form" style="width: 100%;">
+                <div class="card-body">
+                    <h2 class="card-title">{{ event.title }}</h2>
+                    <h3 class="card-subtitle mb-2 text-muted">{{ event.get_dept_display }}</h3>
+                </div>
+            </div>
+        </a>
+
+    {% endfor %}
+
+{% endblock %}

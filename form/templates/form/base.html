@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{% static 'static.js' %}"></script>
+    </head>
+</head>
+<body>
+
+    <div class="sidebar open">
+
+        <div class="logo-details">
+            <span class="logo_name"><img class="logo" src="{% static 'logo.png' %}" /></span>
+        </div>
+    
+        <ul class="nav-links">
+            
+            {% if user.is_authenticated  %}
+                <li>
+                    <a href="{% url 'logout' %}">
+                    <i class='bx bxs-log-out'></i>
+                    <span class="link_name">Logout</span>
+                    </a>
+                </li>     
+
+                {% if user.is_superuser %}
+                    <li id="events">
+                        <a href="{% url 'events' %}">
+                        <i class='bx bx-calendar-event'></i>
+                        <span class="link_name">Events</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li id="addevent">
+                        <a href="{% url 'eventform' %}">
+                        <i class='bx bx-add-to-queue'></i>
+                        <span class="link_name">Add Event Details</span>
+                        </a>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li id="login">
+                    <a href="{% url 'login' %}">
+                    <i class='bx bxs-lock-open'></i>
+                    <span class="link_name">Login</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <section class="home-section">
+        {% block content %}
+
+        {% endblock %}
+    </section>
+
+    <script defer>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e)=>{
+        let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+        arrowParent.classList.toggle("showMenu");
+            });
+        }
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");2
+        sidebarBtn.addEventListener("click", ()=>{
+            sidebar.classList.toggle("close");
+        });
+
+        function addrounds(){
+
+            var rounds = document.getElementById("rounds").value;
+            var roundcontainer = document.getElementById("round-container");
+            var type = document.getElementById('type_desc').value;
+
+            roundcontainer.innerHTML = "";
+
+            for(var i=0; i<rounds; i++){
+                var round = document.createElement("div");
+                round.id =  `round_${i+1}`;
+                round.className = "form-group";
+
+                var input = document.createElement("input");
+                input.type = "text";
+                input.id = `event_round_${i+1}_title`;
+                input.className = "from-control";
+                input.name = `round${i+1}`;
+                input.placeholder = "Enter Round Title";
+                round.appendChild(input);
+
+                var br = document.createElement("br");
+                round.appendChild(br);
+                var br = document.createElement("br");
+                round.appendChild(br);
+
+                var textarea = document.createElement("textarea");
+                textarea.id = `event_round_${i+1}_desc`;
+                textarea.className = "large-desc";
+                textarea.name = `round${i+1}-description`;
+                textarea.placeholder = "Enter your description here";
+                round.appendChild(textarea);
+
+                
+                // if (type === "desc"){
+                    // round.innerHTML = `<input type="text" id="event_round_${i+1}_title" class="from-control" name="round${i+1}" placeholder="Enter Round Title"> <br><br> <textarea id="event_round_${i+1}_desc" class="large-desc" name="round${i+1}-description" placeholder="Enter your description here"></textarea><br><br><hr class="line">`;
+                // }
+                // else{
+                //     round.innerHTML = `<input type="text" id="event_round_${i+1}_title" class="from-control" name="round1" placeholder="Enter Round Title"> <br><br> <div class="flex column"><input type='number' class="form-control" id="no_bullets_${i+1}" name="no_bullets_${i+1}" placeholder="Enter the number of bullet points"><br><br><button type="button" id="add_button_${i+1}" class="add_buttons" onClick="addBullets(${i+1})">Add Bullets</button></div><div id='bullet_container_${i+1}'></div><br><br><hr class="line">`;   
+                // }
+                roundcontainer.appendChild(round);
+            }
+        }   
+        function addBullets(i){
+            var no_bullets = document.getElementById(`no_bullets_${i}`).value;
+            var round = document.getElementById(`bullet_container_${i}`);
+            round.innerHTML = "";
+            console.log(no_bullets)
+            for(var j=0; j<no_bullets; j++){
+                var bullet = document.createElement("div");
+                bullet.className = "form-group";
+                bullet.innerHTML = `<input type="text" id="event_round_${i}_bullet_${j+1}" class="from-control" name="round${i+1}-bullet${j+1}" placeholder="Enter Bullet Point">`;
+                round.appendChild(bullet);
+            }
+        }
+    </script>
+
+    
+</body>
+</html>

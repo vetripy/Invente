@@ -1,0 +1,54 @@
+{% extends 'form/base.html' %}
+
+{% block content %}
+
+<style>
+    /* style it so that it is readable */
+    .event-title {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .event-dept {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .event-desc {
+        font-size: 1.2rem;
+    }
+    .event-date {
+        font-size: 1.2rem;
+    }
+    .event-venue {
+        font-size: 1.2rem;
+    }
+    .event-type {
+        font-size: 1.2rem;
+    }
+    .event-size {
+        font-size: 1.2rem;
+    }
+    .round-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    .round-desc {
+        font-size: 1.2rem;
+    }
+    
+</style>
+    <div class="event-form">
+        <h1 class="event-title">{{ event.title }}</h1>
+        <h2 class="event-dept">{{ event.get_dept_display }}</h2><br>
+        <p class="event-desc data">{{ event.description }}</p><br>
+        <p class="event-date data"><b>Date: </b>{{ event.date }}</p>
+        <p class="event-venue data"><b>Venue: </b>{{ event.venue }}</p>
+        <p class="event-type data"><b>Type :</b> {{ event.team_type }}</p>
+        <p class="event-size data"><b>Team Size: </b> {{ event.team_size }}</p>
+        <br>
+        {% for round in rounds %}
+            <p class="round-title">{{ round.title }}</p>
+            <p class="round-desc">{{ round.description }}</p>
+            <br>
+        {% endfor %}
+    </div>
+{% endblock %}
