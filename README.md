@@ -15,7 +15,7 @@
 
 ## 🛠️ Tech Stack
 
-- **Backend**: Python
+- **Backend**: Python, Django
 - **Frontend**: HTML, CSS, JavaScript
   
 ---
